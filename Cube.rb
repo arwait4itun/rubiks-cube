@@ -26,8 +26,8 @@ class Cube
 		   
 		new_arr=Array.new
 		(0..arr.length-1).each do |i|
-			(0..ar@r[0].length-1).each do |j|
-				new_ar@r[i][j]=ar@r[i][arr.length-1-j]
+			(0..arr[0].length-1).each do |j|
+				new_arr[i][j]=arr[i][arr.length-1-j]
 			end
 		end
 
@@ -41,17 +41,17 @@ class Cube
         if(let=='1')
 			(0..face.length-1).each do |i|
 				(0..face[0].length-1).each do |j|
-					ar@r[j][i]=face[i][j]
+					arr[j][i]=face[i][j]
 				end
 			end
             return reverse(arr)
-        end
 		
-        elsif(let=='2')
+        elsif (let =='2')
             return (face(face(f,'1'),'1'))
         else
             return face(face(f,'2'),'1')
-        end
+		end
+    end
 
 	
 	def move(mv)
@@ -225,3 +225,5 @@ class Cube
 	end
 	
 end
+
+
