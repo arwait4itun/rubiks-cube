@@ -1,5 +1,7 @@
 class Cube
 	
+	#IMPORTANT: Cube is oriented such that the white face faces you with blue on the top, and orange to the left.
+	
 	@cube = Array.new
 	
 	#all the variables below are 2d arrays represending the faces 
@@ -11,7 +13,7 @@ class Cube
 	@g=Array.new
 	@y=Array.new
 	
-	def initialize(white,yellow,blue,green,red,orange,move)
+	def initialize (blue,orange,white,red,green,yellow)
 		@cube = [blue,orange,white,red,green,yellow]
 		@b=blue
 		@o=orange
@@ -24,7 +26,7 @@ class Cube
 	
 	def reverse(arr) #arr=2d arr
 		   
-		new_arr=Array.new
+		new_arr=[[],[],[]]
 		(0..arr.length-1).each do |i|
 			(0..arr[0].length-1).each do |j|
 				new_arr[i][j]=arr[i][arr.length-1-j]
@@ -34,14 +36,14 @@ class Cube
         return new_arr
     end
 
-    def face(face, let) # face=face of cube; let =["1","2","!"]
+    def face(f, let) # f=face of cube; let =["1","2","!"]
 						#this rotates a face of the cube 1,2 or prime
-        arr=Array.new
+        arr=[[],[],[]]
 
         if(let=='1')
-			(0..face.length-1).each do |i|
-				(0..face[0].length-1).each do |j|
-					arr[j][i]=face[i][j]
+			(0..f.length-1).each do |i|
+				(0..f.length-1).each do |j|
+					arr[j][i] = f[i][j]
 				end
 			end
             return reverse(arr)
@@ -59,7 +61,7 @@ class Cube
         
 		if(mv[0] == 'r')
             
-            f=face(r,mv[1])
+            f=face(@r,mv[1])
             @r[0]=f[0]
 			@r[1]=f[1]
 			@r[2]=f[2]
@@ -91,7 +93,7 @@ class Cube
         
         
         elsif(mv[0]=='l')
-            f=face(o,mv[1]);
+            f=face(@o,mv[1]);
             @o[0]=f[0];@o[1]=f[1];@o[2]=f[2];
 
             temp = Array.new
@@ -124,7 +126,7 @@ class Cube
 
             if(mv[1]=='1')
                 
-                f=face(w,'1');
+                f=face(@w,'1');
                 @w[0]=f[0];@w[1]=f[1];@w[2]=f[2];
 				temp = Array.new
 
@@ -149,7 +151,7 @@ class Cube
 
            if(mv[1]=='1')
                 
-				f=face(y,'1');
+				f=face(@y,'1');
 
                 @y[0]=f[0];@y[1]=f[1];@y[2]=f[2];
                 temp = Array.new
@@ -171,7 +173,7 @@ class Cube
 
 
            if(mv[1]=='1')
-				f=face(b,'1');
+				f=face(@b,'1');
 
 			   @b[0]=f[0];@b[1]=f[1];@b[2]=f[2];
 
@@ -194,7 +196,7 @@ class Cube
 		elsif(mv[0]=='d')
 
 			if(mv[1]=='1')
-				f=face(g,'1');
+				f=face(@g,'1');
 
 			   @g[0]=f[0];@g[1]=f[1];@g[2]=f[2];
 
@@ -221,9 +223,45 @@ class Cube
 			i.each do |j|
 				p j
 			end
+			puts
+			puts "---------------"
+			puts
 		end
 	end
 	
 end
 
+=begin
+g= [["g","g","g"],
+   ["g","g","g"],
+   ["g","g","g"]]
 
+w= [["w","w","w"],
+   ["w","w","w"],
+   ["w","w","w"]]
+
+o= [["o","o","o"],
+   ["o","o","o"],
+   ["o","o","o"]]
+
+r= [["r","r","r"],
+   ["r","r","r"],
+   ["r","r","r"]]
+
+
+b= [["b","b","b"],
+   ["b","b","b"],
+   ["b","b","b"]]
+
+
+y= [["y","y","y"],
+   ["y","y","y"],
+   ["y","y","y"]]
+
+c = Cube.new(b,o,w,r,g,y) 
+
+
+c.move("r1")
+
+c.display
+=end
